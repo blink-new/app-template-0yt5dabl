@@ -4,15 +4,15 @@ import { Input } from './ui/input'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card'
 
 interface WelcomeScreenProps {
-  onSubmit: (code: string) => void
+  onContinue: () => void
 }
 
-export default function WelcomeScreen({ onSubmit }: WelcomeScreenProps) {
-  const [accessCode, setAccessCode] = useState('')
+export default function WelcomeScreen({ onContinue }: WelcomeScreenProps) {
+  const [inputValue, setInputValue] = useState('')
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    onSubmit(accessCode)
+    onContinue()
   }
 
   return (
@@ -34,12 +34,12 @@ export default function WelcomeScreen({ onSubmit }: WelcomeScreenProps) {
           </div>
         </div>
 
-        {/* Access Code Form */}
+        {/* Input Form */}
         <Card className="shadow-lg border-0">
           <CardHeader>
-            <CardTitle className="text-center text-xl">Zugangscode</CardTitle>
+            <CardTitle className="text-center text-xl">Eingabefeld</CardTitle>
             <CardDescription className="text-center">
-              Bitte geben Sie den 8-stelligen Zugangscode aus dem VCT ein!
+              Bitte geben Sie einen Wert ein und klicken Sie auf Weiter.
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -47,19 +47,18 @@ export default function WelcomeScreen({ onSubmit }: WelcomeScreenProps) {
               <div>
                 <Input
                   type="text"
-                  placeholder="Zugangscode eingeben"
-                  value={accessCode}
-                  onChange={(e) => setAccessCode(e.target.value)}
-                  maxLength={8}
+                  placeholder="Eingabe"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
                   className="text-center text-lg h-14 border-2 border-gray-300 focus:border-blue-500"
                 />
               </div>
               <Button 
                 type="submit" 
                 className="w-full h-14 text-lg bg-blue-600 hover:bg-blue-700"
-                disabled={accessCode.length !== 8}
+                disabled={inputValue.trim() === ''}
               >
-                Anmelden
+                Weiter
               </Button>
             </form>
           </CardContent>

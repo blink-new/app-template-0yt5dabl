@@ -8,17 +8,14 @@ import ContentView from './components/ContentView'
 import './App.css'
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [continueClicked, setContinueClicked] = useState(false)
 
-  const handleAccessCodeSubmit = (code: string) => {
-    // Simple validation - in real app this would be server-side
-    if (code.length === 8) {
-      setIsAuthenticated(true)
-    }
+  const handleContinue = () => {
+    setContinueClicked(true)
   }
 
-  if (!isAuthenticated) {
-    return <WelcomeScreen onSubmit={handleAccessCodeSubmit} />
+  if (!continueClicked) {
+    return <WelcomeScreen onContinue={handleContinue} />
   }
 
   return (
